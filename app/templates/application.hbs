@@ -1,3 +1,46 @@
-<h2 id="title">Welcome to Ember</h2>
+<div class="container-app">
 
-{{outlet}}
+  <div class="gt-header">
+    {{#gt-icon-button property=menuIsOpen
+    }}menu{{/gt-icon-button}}
+    Grondtoon
+  </div>
+
+  <div class="gt-view">
+
+    <div class="gt-content">
+      {{outlet}}
+    </div>
+
+    {{gt-overlay open=menuIsOpen}}
+
+    {{#gt-menu open=menuIsOpen}}
+      <ul>
+        <li>{{#link-to "map"  }}Map  {{/link-to}}</li>
+        <li>{{#link-to "walks"}}Walks{{/link-to}}</li>
+        <li>{{#link-to "guide.settings"}}Guide{{/link-to}}</li>
+        <li>{{#link-to "about"}}About{{/link-to}}</li>
+      </ul>
+    {{/gt-menu}}
+
+  </div>
+
+  {{#if model.walkhandler.loaded}}
+    <div class="gt-footer">
+      <span>
+        {{model.walkhandler.selected}},
+      </span>
+      <span>
+        by
+        {{#if model.walkhandler.creatorLink}}
+          <a href={{model.walkhandler.creatorLink}} target="_blank">
+            {{model.walkhandler.creator}}
+          </a>
+        {{else}}
+          {{model.walkhandler.creator}}
+        {{/if}}
+      </span>
+    </div>
+  {{/if}}
+
+</div>

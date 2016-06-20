@@ -4,8 +4,10 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'grondtoon',
     environment: environment,
-    baseURL: '/',
-    locationType: 'auto',
+    // baseURL: '/',
+    // locationType: 'auto',
+    baseURL: null,
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
