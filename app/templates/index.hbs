@@ -1,0 +1,14 @@
+<div class="index-title">
+  Welcome to Grondtoon
+</div>
+
+<div class="content">
+  Grondtoon is a location-based audio web-app. You can listen to different walks created by artists.
+  <br>
+  See which walks are near you, or if this is the first time visiting read the guide.
+</div>
+
+<div class="content flex gt-buttons">
+  {{#link-to "guide.settings" click=(action 'enableAudio')}}GUIDE{{/link-to}}
+  {{#link-to "walks" click=(action 'enableAudio')}}WALKS{{/link-to}}
+</div>

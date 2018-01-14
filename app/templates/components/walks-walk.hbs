@@ -1,0 +1,15 @@
+<span class="title">
+  {{walk.walkname}}
+</span>
+<span class="distance">
+  at {{distance}} km
+</span>
+<br>
+Created by
+{{#if walk.creatorLink}}
+  <a href={{walk.creatorLink}} target="_blank">
+    {{walk.creator}}
+  </a>
+{{else}}
+  {{walk.creator}}
+{{/if}}

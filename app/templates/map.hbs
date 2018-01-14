@@ -1,0 +1,61 @@
+<!-- <div class="map-container"> -->
+  {{#leaflet-map
+    lat  = (add model.geohandler.latitude -0.0001)
+    lng  = model.geohandler.longitude
+    zoom = 17
+
+    dragging        = false
+    touchZoom       = false
+    scrollWheelZoom = false
+    doubleClickZoom = false
+    boxZoom         = false
+    tap             = false
+    keyboard        = false
+
+    zoomControl        = false
+    attributionControl = false
+
+    zoomAnimationThreshold = 20
+  }}
+    {{tile-layer
+      maxZoom = 19
+      url = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}.png"
+      subdomains = 'abcd'
+      detectRetina = true
+    }}
+
+    {{#if model.walkhandler.loaded}}
+      {{#each model.walkhandler.walk as |area|}}
+        {{#unless area.hidden}}
+          {{geojson-layer
+            geoJSON = area.polygon
+
+            clickable = false
+            weight = 3
+            fillOpacity = 0.05
+          }}
+        {{/unless}}
+      {{/each}}
+    {{/if}}
+
+    {{circle-layer
+      lat    = model.geohandler.latitude
+      lng    = model.geohandler.longitude
+      radius = 5
+
+      color       = "black"
+      fillOpacity = 0.3
+      clickable   = false
+    }}
+    {{circle-layer
+      lat    = model.geohandler.latitude
+      lng    = model.geohandler.longitude
+      radius = model.geohandler.accuracy
+
+      stroke      = false
+      color       = "black"
+      fillOpacity = 0.05
+      clickable   = false
+    }}
+  {{/leaflet-map}}
+<!-- </div> -->

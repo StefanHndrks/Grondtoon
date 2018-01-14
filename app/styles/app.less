@@ -1,0 +1,296 @@
+// @import url(https://fonts.googleapis.com/css?family=Roboto:300|Roboto+Slab:300);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,100|Roboto+Slab:300,100);
+
+@import "variables";
+@import "loading";
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  &:extend(.nonselectable);
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.container-app {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+
+  // background-color: grey;
+}
+
+.gt-header {
+  flex-grow: 0;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px 15px;
+  font-size: 34px;
+
+  background-color: @gt-primaryColor;
+  border-bottom: 2px solid @gt-secretaryColor;
+
+  > i {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06);
+    margin-right: 13px;
+    cursor: pointer;
+  }
+}
+
+.gt-footer {
+  flex-grow: 0;
+
+  padding: 9px 10px;
+  font-size: 16px;
+
+  background-color: @gt-primaryColor;
+  border-top: 2px solid @gt-secretaryColor;
+
+  > span {
+    display: inline-block;
+
+    > a {
+      text-decoration: none;
+    }
+  }
+}
+
+.gt-view {
+  position:relative;
+
+  flex-grow: 1;
+}
+
+.gt-menu {
+  position: absolute;
+
+  width: @menu-width;
+  height: 100%;
+
+  // font-size: 24px;
+  font-size: 28px;
+
+  background-color: @gt-primaryColor;
+
+  transform: translateX(-@menu-width);
+  // transition TO close
+  transition: transform @menu-close-time @sharp-curve 0s;
+
+  &.open {
+    transform: translateX(0);
+    // transition TO open
+    transition: transform @menu-open-time @deceleration-curve 0s;
+  }
+
+  > ul {
+    margin: 0;
+    padding: 0; // Override default ul/ol
+    list-style: none;
+
+    > li {
+      position: relative;
+      display: block;
+
+      > a {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06);
+        position: relative;
+        display: block;
+        padding: 10px 17px;
+        text-decoration: none;
+        color: inherit;
+        &:hover,
+        &:focus {
+          color: inherit;
+          text-decoration: none;
+        }
+        &:hover {
+          background-color: @gt-secretaryColor;
+        }
+      }
+    }
+  }
+}
+
+.gt-overlay {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: #000;
+
+  .opacity(0);
+  pointer-events: none;
+  // transition TO close
+  transition: opacity @menu-close-time @standard-curve 0s;
+
+  &.open {
+    .opacity(0.4);
+    pointer-events: auto;
+    cursor: pointer;
+    // transition TO open
+    transition: opacity @menu-open-time @standard-curve 0s;
+  }
+}
+
+.gt-content {
+  &:extend(.selectable);
+
+  // fix chrome scroll issue:
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=453601
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=530121
+  transform: translateX(0);
+
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.gt-buttons {
+  > div {
+    border: 4px solid @gt-primaryColor;
+    width: 30%;
+    max-width: 120px;
+    padding: 10px 17px;
+    display: inline-block;
+    position: relative;
+  }
+  > a {
+    text-align: center;
+    border: 4px solid @gt-secretaryColor;
+    width: 30%;
+    max-width: 120px;
+    font-size: 24px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06);
+    position: relative;
+    display: inline-block;
+    padding: 10px 17px;
+    text-decoration: none;
+    color: inherit;
+    &:hover,
+    &:focus {
+      color: inherit;
+      text-decoration: none;
+    }
+    &:hover {
+      background-color: @gt-secretaryColor;
+    }
+  }
+}
+
+.content-test {
+  height: 1000px;
+  width: 100%;
+}
+
+.material-icons.md-18 {font-size: 18px;}
+.material-icons.md-24 {font-size: 24px;}
+.material-icons.md-36 {font-size: 36px;}
+.material-icons.md-48 {font-size: 48px;}
+
+.nonselectable {
+  // -webkit-touch-callout: none;
+  -webkit-user-select: none; // Chrome all / Safari all
+     -moz-user-select: none; // Firefox all
+      -ms-user-select: none; // IE 10+
+          user-select: none; // Likely future
+}
+
+.selectable {
+  // -webkit-touch-callout: all;
+  -webkit-user-select: all; // Chrome all / Safari all
+     -moz-user-select: all; // Firefox all
+      -ms-user-select: all; // IE 10+
+          user-select: all; // Likely future
+}
+
+.opacity (@opacity: 0.5) {
+  -webkit-opacity: @opacity;
+	   -moz-opacity: @opacity;
+	        opacity: @opacity;
+}
+
+.leaflet-container {
+  background-color: @gt-secretaryColor;
+  height: 100%;
+}
+
+.index-title {
+  background-color: @gt-secretaryColor;
+  padding: 15px 17px;
+  font-size: 45px;
+
+  // font-family: 'Roboto Slab', serif;
+  // font-weight: 100;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.content {
+  background-color: @gt-primaryColor;
+  padding: 15px 17px;
+  font-size: 20px;
+
+  &.title {
+    font-size: 28px;
+  }
+
+  > .code {
+    display: inline-block;
+    background-color: @gt-secretaryColor;
+    border-radius: 4px;
+    padding: 0 4px;
+  }
+}
+
+.walks-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: @gt-secretaryColor;
+}
+
+.walks-walk {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  padding: 15px 17px;
+  background-color: @gt-primaryColor;
+  margin-bottom: 2px;
+  font-size: 20px;
+  line-height: 1.4;
+
+  > .title {
+    font-size: 28px;
+  }
+  > .distance {
+    color: #8D8D8D;
+  }
+  > a {
+    text-decoration: none;
+  }
+}

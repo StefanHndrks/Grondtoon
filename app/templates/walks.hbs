@@ -1,0 +1,10 @@
+<div class="walks-container">
+  {{#each model.walks as |walk|}}
+    {{walks-walk
+      walk=walk
+      location=model.location
+
+      click=(action 'select' walk.walkname walk.creator walk.creatorLink)
+    }}
+  {{/each}}
+</div>
